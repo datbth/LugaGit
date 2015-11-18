@@ -25,6 +25,45 @@
 			    var systemNavigation = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
 			    systemNavigation.appViewBackButtonVisibility = Windows.UI.Core.AppViewBackButtonVisibility.visible;
 
+                // Binding navigation functions 
+			    /* Author: Dat - Modified date: 18-11-2015 */
+			    function navigate(eventObject) {
+			        var url = eventObject.detail.location,
+                            host = $("#content-host")[0];
+
+			        host.winControl && host.winControl.unload && host.winControl.unload();
+			        WinJS.Utilities.empty(host);
+			        eventObject.detail.setPromise(
+                      WinJS.UI.Pages.render(url, host, eventObject.detail.state).then(function () {
+                          WinJS.Application.sessionState.lastUrl = url;
+                          WinJS.UI.Animation.enterPage(host);
+                          WinJS.UI.processAll();
+                      }));
+			    };
+                // load index page when app starts
+			    $('document').ready(function () {
+			        WinJS.Navigation.navigate("/pages/index.html"); // navigate to Home page
+			        WinJS.Navigation.addEventListener("navigated", navigate);
+			    })
+
+                // bind events to navigation menu
+			    $('#nav-goHome').click(function () {
+			        WinJS.Navigation.navigate("/pages/index.html"); // navigate to Home page
+			        WinJS.Navigation.addEventListener("navigated", navigate);
+			    })
+			    $('#nav-addNewFood').click(function () {
+			        WinJS.Navigation.navigate("/pages/food/addNewFood.html"); // navigate to addNewFood page
+			        WinJS.Navigation.addEventListener("navigated", navigate);
+			    });
+			    $('#nav-recommendation-ingredient').click(function () {
+			        WinJS.Navigation.navigate("/pages/recommendation/ingredientBasedSuggestion.html"); // navigate to ingredientBasedSuggestion page
+			        WinJS.Navigation.addEventListener("navigated", navigate);
+			    });
+			    $('#nav-recommendation-week-menu').click(function () {
+			        WinJS.Navigation.navigate("/pages/recommendation/weekMenuSuggestion.html"); // navigate to weekMenuSuggestion page
+			        WinJS.Navigation.addEventListener("navigated", navigate);
+			    });
+			
                 
 			}));
 
@@ -38,7 +77,7 @@
 	};
 
 	app.onbackclick = function (evt) {
-	    navigateBack();
+	    WinJS.Navigation.back(1).done;
 	    // Need to return true to cancel the default behavior of this event.
 	    return true;
 	}

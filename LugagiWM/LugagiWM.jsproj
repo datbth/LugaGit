@@ -85,6 +85,10 @@
     <Content Include="js\default.js" />
     <Content Include="css\default.css" />
     <Content Include="js\jquery.min.js" />
+    <Content Include="pages\food\addNewFood.html" />
+    <Content Include="pages\index.html" />
+    <Content Include="pages\recommendation\ingredientBasedSuggestion.html" />
+    <Content Include="pages\recommendation\weekMenuSuggestion.html" />
     <Content Include="WinJS\css\ui-dark.css" />
     <Content Include="WinJS\css\ui-light.css" />
     <Content Include="WinJS\fonts\Symbols.ttf" />
@@ -94,7 +98,7 @@
     <None Include="LugagiWM_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="pages\" />
+    <Folder Include="script\" />
     <Folder Include="script\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\$(WMSJSProjectDirectory)\Microsoft.VisualStudio.$(WMSJSProject).targets" />
