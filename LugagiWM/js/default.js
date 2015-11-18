@@ -25,6 +25,40 @@
 			    var systemNavigation = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
 			    systemNavigation.appViewBackButtonVisibility = Windows.UI.Core.AppViewBackButtonVisibility.visible;
 
+                // Binding navigation functions 
+			    /* Author: Dat - Modified date: 18-11-2015 */
+			    function navigate(location) {
+			        WinJS.Navigation.navigate(location); // navigate to location
+			        WinJS.Navigation.addEventListener("navigated", function (eventObject) {
+			            var url = eventObject.detail.location,
+                                host = $("#content-host")[0];
+                        // unload content
+			            host.winControl && host.winControl.unload && host.winControl.unload();
+			            WinJS.Utilities.empty(host);
+                        // render content
+			            eventObject.detail.setPromise(
+                          WinJS.UI.Pages.render(url, host, eventObject.detail.state).then(function () {
+                              WinJS.Application.sessionState.lastUrl = url;
+                              WinJS.UI.Animation.enterPage(host);
+                              WinJS.UI.processAll();
+                          }));
+			        });
+			    };
+			    $('document').ready(function () {
+			        WinJS.Navigation.navigate("/pages/index.html"); // navigate to Home page
+			        WinJS.Navigation.addEventListener("navigated", navigate);
+			    })
+
+			    $('#nav-goHome').click(function (e) {
+			        console.log(e.detail.location);
+			        WinJS.Navigation.navigate("/pages/index.html"); // navigate to Home page
+			        WinJS.Navigation.addEventListener("navigated", navigate);
+			    })
+			    $('#nav-addNewFood').click(function () {
+			        WinJS.Navigation.navigate("/pages/food/addNewFood.html"); // navigate to addNewFood page
+			        WinJS.Navigation.addEventListener("navigated", navigate);
+			    });
+			
                 
 			}));
 
