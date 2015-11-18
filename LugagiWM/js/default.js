@@ -13,6 +13,12 @@
 				// To create a smooth user experience, restore application state here so that it looks like the app never stopped running.
 			}
 			args.setPromise(WinJS.UI.processAll().done(function () {
+			    // app variables
+                /* added by Dat - 18-11-2015 */
+                var viewWidth = window.innerWidth
+                var splitView = document.getElementById('mySplitView').winControl;
+                var windowSize;
+			    
 
                 //Enable the title bar color of Windows 10
 			    var v = Windows.UI.ViewManagement.ApplicationView.getForCurrentView();
@@ -25,24 +31,49 @@
 			    var systemNavigation = Windows.UI.Core.SystemNavigationManager.getForCurrentView();
 			    systemNavigation.appViewBackButtonVisibility = Windows.UI.Core.AppViewBackButtonVisibility.visible;
 
-                // Binding navigation functions 
+                // app functions 
 			    /* Author: Dat - Modified date: 18-11-2015 */
+                // function to hide pane in small window size
+			    function navResize() {
+			        if (window.innerWidth < 800) {
+			            splitView.openedDisplayMode = WinJS.UI.SplitView.ClosedDisplayMode.overlay
+			            splitView.closedDisplayMode = WinJS.UI.SplitView.ClosedDisplayMode.none
+                        windowSize = 'small'
+			        }
+			    };
+
+                //function to navigate between pages
 			    function navigate(eventObject) {
+			        if (windowSize == 'small') {
+			            splitView.closePane()
+			        }
 			        var url = eventObject.detail.location,
                             host = $("#content-host")[0];
-
+                    // unload content
 			        host.winControl && host.winControl.unload && host.winControl.unload();
 			        WinJS.Utilities.empty(host);
+                    // load new content
 			        eventObject.detail.setPromise(
                       WinJS.UI.Pages.render(url, host, eventObject.detail.state).then(function () {
                           WinJS.Application.sessionState.lastUrl = url;
                           WinJS.UI.Animation.enterPage(host);
                           WinJS.UI.processAll();
                       }));
+			        
 			    };
-                // load index page when app starts
+
+                // resize the pane based on window size
+			    WinJS.UI.processAll().then(function () {
+			        navResize();
+			        window.addEventListener("resize", navResize, false);
+			    });
+                
+
+                // load index page when app initiates
 			    $('document').ready(function () {
 			        WinJS.Navigation.navigate("/pages/index.html"); // navigate to Home page
+			        WinJS.Navigation.addEventListener("navigated", navigate);
+			        WinJS.Navigation.navigate("/pages/index.html"); 
 			        WinJS.Navigation.addEventListener("navigated", navigate);
 			    })
 

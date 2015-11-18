@@ -29,10 +29,10 @@
                 <button class="pull-right" data-win-control="WinJS.UI.Command" data-win-options="{icon: 'find'}"></button>
             </div>
         </div>
-        <div class="splitView" data-win-control="WinJS.UI.SplitView" data-win-options="{
-            openedDisplayMode: 'overlay',
+        <div id="mySplitView" class="splitView" data-win-control="WinJS.UI.SplitView" data-win-options="{
+            openedDisplayMode: 'inline',
             closedDisplayMode: 'inline'
-         }">
+        }">
 
             <!-- Pane area -->
             <div class="panearea" id="panearea">
@@ -42,11 +42,11 @@
                     <div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Ingredient-based suggestion', icon: 'rotate'}" id="nav-recommendation-ingredient"></div>
                     <div data-win-control="WinJS.UI.SplitViewCommand" data-win-options="{ label: 'Week menu suggestion', icon: 'calendar'}" id="nav-recommendation-week-menu"></div>
                 </div>
-             </div>
+            </div>
             <!-- Content area -->
+
             <div class="container-fluid">
                 <div class="row" id="content-host">
-                    <p>Home</p>
                 </div>
             </div>
         </div>
