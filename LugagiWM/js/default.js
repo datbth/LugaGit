@@ -36,11 +36,11 @@
                 // function to hide pane in small window size
 			    function navResize() {
 			        if (window.innerWidth < 700) {
-			            splitView.openedDisplayMode = WinJS.UI.SplitView.ClosedDisplayMode.overlay
+			            splitView.openedDisplayMode = WinJS.UI.SplitView.OpenedDisplayMode.overlay
 			            splitView.closedDisplayMode = WinJS.UI.SplitView.ClosedDisplayMode.none
                         windowSize = 'small'
 			        } else {
-			            splitView.openedDisplayMode = WinJS.UI.SplitView.ClosedDisplayMode.inline
+			            splitView.openedDisplayMode = WinJS.UI.SplitView.OpenedDisplayMode.inline
 			            splitView.closedDisplayMode = WinJS.UI.SplitView.ClosedDisplayMode.inline
 			        }
 			    };
@@ -68,7 +68,7 @@
                 // resize the pane based on window size
 			    WinJS.UI.processAll().then(function () {
 			        navResize();
-			        window.addEventListener("resize", navResize, false);
+			        $(window).resize(navResize);
 			    });
                 
 
