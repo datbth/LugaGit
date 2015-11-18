@@ -35,10 +35,13 @@
 			    /* Author: Dat - Modified date: 18-11-2015 */
                 // function to hide pane in small window size
 			    function navResize() {
-			        if (window.innerWidth < 800) {
+			        if (window.innerWidth < 700) {
 			            splitView.openedDisplayMode = WinJS.UI.SplitView.ClosedDisplayMode.overlay
 			            splitView.closedDisplayMode = WinJS.UI.SplitView.ClosedDisplayMode.none
                         windowSize = 'small'
+			        } else {
+			            splitView.openedDisplayMode = WinJS.UI.SplitView.ClosedDisplayMode.inline
+			            splitView.closedDisplayMode = WinJS.UI.SplitView.ClosedDisplayMode.inline
 			        }
 			    };
 
