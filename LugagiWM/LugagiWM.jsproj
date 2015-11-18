@@ -87,6 +87,8 @@
     <Content Include="js\jquery.min.js" />
     <Content Include="pages\food\addNewFood.html" />
     <Content Include="pages\index.html" />
+    <Content Include="pages\recommendation\ingredientBasedSuggestion.html" />
+    <Content Include="pages\recommendation\weekMenuSuggestion.html" />
     <Content Include="WinJS\css\ui-dark.css" />
     <Content Include="WinJS\css\ui-light.css" />
     <Content Include="WinJS\fonts\Symbols.ttf" />
